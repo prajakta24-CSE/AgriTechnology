@@ -1,0 +1,110 @@
+{
+  "appName": "Agri-Tech",
+  "appTagline": "Smart Farming & Sustainable Agriculture",
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "farms": "Farms",
+    "crops": "Crops",
+    "soilHealth": "Soil Health",
+    "weather": "Weather & Pests",
+    "marketplace": "Marketplace",
+    "orders": "Orders",
+    "forum": "Community & Experts",
+    "admin": "Admin Panel",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "home": {
+    "heroTitle": "Empowering Farmers with Smart Agricultural Intelligence",
+    "heroSubtitle": "All-in-one precision agriculture platform integrating real-time weather alerts, NPK soil diagnostics, pest mitigation advisories, and certified input marketplace.",
+    "exploreDashboard": "Open Farm Dashboard",
+    "quickDemo": "Try Demo Login",
+    "statFarmers": "Active Farmers",
+    "statAcres": "Acres Monitored",
+    "statCrops": "Crops Optimized",
+    "statAdvisories": "Daily Advisories"
+  },
+  "dashboard": {
+    "title": "Farm Operations Command Center",
+    "welcome": "Welcome back,",
+    "activeFarms": "Total Farms",
+    "activeCrops": "Active Crops",
+    "soilQuality": "Soil Health Index",
+    "pendingOrders": "Active Orders",
+    "quickActions": "Quick Farm Actions",
+    "addFarm": "Add New Farm",
+    "addCrop": "Register Crop",
+    "testSoil": "Analyze Soil",
+    "checkWeather": "Live Weather",
+    "recentCrops": "Your Growing Crops",
+    "recentOrders": "Recent Marketplace Orders"
+  },
+  "farms": {
+    "title": "My Farm Holdings",
+    "subtitle": "Manage geographic plots, soil profiles, and irrigation systems.",
+    "addNew": "Add New Farm Plot",
+    "totalAcres": "Total Acreage",
+    "irrigation": "Irrigation Type",
+    "soil": "Soil Classification"
+  },
+  "crops": {
+    "title": "Crop Lifecycle Management",
+    "subtitle": "Track vegetative progress from seed sowing to harvest yield estimation.",
+    "registerCrop": "Register New Crop",
+    "stage": "Growth Stage",
+    "health": "Health Status",
+    "harvestForecast": "Harvest Forecast",
+    "advanceStage": "Advance Stage",
+    "logActivity": "Log Farm Activity"
+  },
+  "soil": {
+    "title": "Soil Health Intelligence & Nutrient Diagnostics",
+    "subtitle": "Calculate NPK balance, pH suitability score, and generate custom fertilizer plans.",
+    "testSoil": "Run Soil Health Test",
+    "nitrogen": "Nitrogen (N)",
+    "phosphorus": "Phosphorus (P)",
+    "potassium": "Potassium (K)",
+    "ph": "Soil pH Level",
+    "moisture": "Moisture %",
+    "organicMatter": "Organic Carbon %",
+    "calculateAdvisory": "Generate Smart Soil Report",
+    "scoreLabel": "Soil Quality Score",
+    "recommendation": "Expert Fertilizer & Crop Plan"
+  },
+  "weather": {
+    "title": "Real-time Weather & Smart Pest Early Warning",
+    "subtitle": "Live meteorological conditions, 7-day agricultural forecast, and pest risk advisories.",
+    "searchCity": "Search Agricultural Region / City",
+    "temp": "Temperature",
+    "humidity": "Humidity",
+    "wind": "Wind Speed",
+    "rainProb": "Rain Probability",
+    "sprayingAdvice": "Chemical Spraying Suitability",
+    "pestAlerts": "Active Pest & Disease Outbreaks"
+  },
+  "marketplace": {
+    "title": "Certified Agri-Marketplace",
+    "subtitle": "Purchase certified hybrid seeds, organic fertilizers, bio-pesticides, and IoT sensors.",
+    "categories": "Product Categories",
+    "all": "All Items",
+    "seeds": "Seeds",
+    "fertilizers": "Fertilizers",
+    "pesticides": "Bio-Pesticides",
+    "tools": "Irrigation & Tools",
+    "machinery": "Machinery & Equipment",
+    "addToCart": "Add to Cart",
+    "inStock": "In Stock",
+    "organic": "Organic Certified"
+  },
+  "forum": {
+    "title": "Expert Consultation & Farmers Community",
+    "subtitle": "Connect with verified agricultural scientists and peer farmers for crop solutions.",
+    "askQuestion": "Ask an Agricultural Expert",
+    "searchTopics": "Search questions, crop diseases, or remedies...",
+    "expertAnswer": "Verified Expert Solution",
+    "upvote": "Helpful",
+    "reply": "Submit Answer"
+  }
+}

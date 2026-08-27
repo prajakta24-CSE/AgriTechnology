@@ -1,0 +1,131 @@
+# Implementation Plan: Agri-Tech Smart Farming Management System (MERN Stack)
+
+Agri-Tech is an end-to-end, full-stack smart farming web application designed to empower farmers with digital tools that enhance agricultural productivity and sustainability. Built with the MERN stack (MongoDB, Express.js, React.js, Node.js), Bootstrap, and modern data visualization libraries, the system bridges the gap between traditional farming practices and modern digital innovation.
+
+---
+
+## System Architecture & Epics
+
+The application is structured around the 6 core epics and 19 sub-tasks requested:
+
+1. **Epic 1: System Foundation & Role-Based Security**
+   - Express REST API architecture with MongoDB (Mongoose), JWT authentication, bcrypt password hashing, input validation, and role-based access control (`farmer`, `admin`, `expert`).
+   - One-click demo login for rapid testing and mentor evaluation (Farmer Demo & Admin Demo).
+
+2. **Epic 2: Farm & Land Profiling**
+   - Farm profile setup (land area, soil category, irrigation system, geolocation/coordinates, climate region).
+   - CRUD management for multiple farm plots per farmer with summarized acreage and health analytics.
+
+3. **Epic 3: Crop Lifecycle & Soil Health Intelligence**
+   - Crop lifecycle tracking from sowing, germination, vegetative, flowering, to harvesting with stage-based progress indicators.
+   - Soil health nutrient analyzer (NPK, pH, moisture, organic matter) with interactive Radar/Bar charts and automated fertilizer/crop recommendations.
+
+4. **Epic 4: Weather Forecasting & Smart Pest Alert Engine**
+   - Real-time weather integration (temperature, humidity, precipitation probability, wind speed, UV index, 7-day forecast).
+   - Dynamic agricultural weather advisories & intelligent pest risk detection based on weather anomalies and crop vulnerability.
+
+5. **Epic 5: Agri-Marketplace & Order Tracking**
+   - Agricultural e-commerce module for high-yield seeds, eco-friendly fertilizers, bio-pesticides, and smart machinery.
+   - Shopping cart, checkout simulation, invoice generation, and real-time step-by-step order tracking (`Pending` -> `Processing` -> `Shipped` -> `Delivered`).
+
+6. **Epic 6: Expert Consultation, Community Forum & Admin Operations**
+   - Community forum where farmers post crop symptoms/queries and receive verified expert answers and community solutions.
+   - Comprehensive Admin Control Center for inventory management, user & farm oversight, crop metrics, and emergency agricultural broadcast alerts.
+   - Native Multilingual Engine supporting English, Hindi (हिन्दी), Telugu (తెలుగు), Tamil (தமிழ்), and Marathi (मराठी).
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> The application will run locally with MongoDB (`mongodb://127.0.0.1:27017/agritech`) and provides an automatic database seeder script (`npm run seed`) with realistic Indian and international agricultural data, pre-configured demo credentials (`farmer@agritech.com` / `admin@agritech.com`), and weather APIs (Open-Meteo with fallback).
+
+---
+
+## Proposed Changes
+
+### Backend (`/backend`)
+
+#### [NEW] [package.json](file:///c:/Users/bajra/AgriTech/backend/package.json)
+- Dependencies: `express`, `mongoose`, `jsonwebtoken`, `bcryptjs`, `cors`, `dotenv`, `morgan`, `express-validator`, `axios`.
+- Scripts for `start`, `dev` (nodemon), and `seed`.
+
+#### [NEW] [server.js](file:///c:/Users/bajra/AgriTech/backend/server.js)
+- Express entry point, middleware configuration (CORS, JSON parser, Morgan logger), database connection, route mounting, and centralized error handler.
+
+#### [NEW] [config/db.js](file:///c:/Users/bajra/AgriTech/backend/config/db.js)
+- Robust Mongoose connection handler with retry logic and clear console diagnostics.
+
+#### [NEW] Data Models (`/backend/models`)
+- [User.js](file:///c:/Users/bajra/AgriTech/backend/models/User.js): User profile, role (`farmer`, `admin`, `expert`), preferred language, phone, avatar.
+- [Farm.js](file:///c:/Users/bajra/AgriTech/backend/models/Farm.js): Farmer reference, farm name, location coordinates, total area, soil type, irrigation type, crop history.
+- [Crop.js](file:///c:/Users/bajra/AgriTech/backend/models/Crop.js): Farm reference, crop type, variety, planting date, harvest date, growth stage, health status, yield forecast.
+- [SoilReport.js](file:///c:/Users/bajra/AgriTech/backend/models/SoilReport.js): Nitrogen, Phosphorus, Potassium, pH, moisture, recommendation text, health score.
+- [PestAlert.js](file:///c:/Users/bajra/AgriTech/backend/models/PestAlert.js): Crop affected, pest name, risk level (`low`, `medium`, `high`, `critical`), symptoms, organic & chemical remedies.
+- [Resource.js](file:///c:/Users/bajra/AgriTech/backend/models/Resource.js): Category (`seeds`, `fertilizers`, `pesticides`, `equipment`), price, rating, stock, image.
+- [Order.js](file:///c:/Users/bajra/AgriTech/backend/models/Order.js): Farmer reference, line items, total amount, shipping address, status history.
+- [ForumPost.js](file:///c:/Users/bajra/AgriTech/backend/models/ForumPost.js): Author reference, topic, crop tag, question, image, upvotes, expert answers list.
+
+#### [NEW] Controllers & Routes (`/backend/controllers` & `/backend/routes`)
+- `authController.js` & `authRoutes.js`: Sign up, Login, Get Current User, Update Profile.
+- `farmController.js` & `farmRoutes.js`: CRUD operations for farm plots.
+- `cropController.js` & `cropRoutes.js`: Add, update growth stage, record health check, yield calculation.
+- `soilController.js` & `soilRoutes.js`: Submit soil test values, calculate nutrient index, generate smart recommendation.
+- `weatherController.js` & `weatherRoutes.js`: Weather endpoint with forecast, precipitation radar data, and pest risk calculation.
+- `resourceController.js` & `resourceRoutes.js`: Catalog listing, category filtering, admin product creation & stock update.
+- `orderController.js` & `orderRoutes.js`: Create order, get farmer orders, admin update order status.
+- `forumController.js` & `forumRoutes.js`: Community Q&A feed, reply, upvote, mark resolved.
+- `adminController.js` & `adminRoutes.js`: System stats summary, user management, broadcast alert creation.
+
+#### [NEW] Middleware (`/backend/middleware`)
+- `authMiddleware.js`: JWT token validation, role-based guard (`requireRole`).
+- `errorMiddleware.js`: 404 handler and structured error formatting.
+
+#### [NEW] [seeders/seedData.js](file:///c:/Users/bajra/AgriTech/backend/seeders/seedData.js)
+- Seeds users (Admin, Farmers, Experts), sample farms, active crops with growth timelines, soil testing reports, marketplace inventory, pest advisories, and active forum threads.
+
+---
+
+### Frontend (`/frontend`)
+
+#### [NEW] React Setup & Dependencies
+- Created with React 18, React Router v6, Axios, Bootstrap 5 + Bootstrap Icons, Chart.js (`react-chartjs-2`), Canvas Confetti, and custom UI styling.
+
+#### [NEW] Theme & Styling
+- Custom design system in `src/index.css` featuring lush emerald green primary tokens (`#1b5e20`, `#2e7d32`, `#4caf50`), glassmorphic cards, gold/amber accent highlights, smooth transitions, responsive tables, and mobile-friendly bottom navigation.
+
+#### [NEW] Context Providers
+- `AuthContext.js`: Stores token, user session, login, logout, demo login triggers.
+- `LanguageContext.js`: Supports real-time switching between English, Hindi, Telugu, Tamil, Marathi.
+- `CartContext.js`: Manages marketplace shopping cart, quantity controls, and checkout state.
+
+#### [NEW] Core Pages & Components
+- **Navbar & Footer**: Responsive top navbar with user profile dropdown, language picker, cart badge, and navigation links.
+- **Home (`Home.js`)**: Hero section, live stats counter, platform features breakdown, weather ticker, and call to action.
+- **Dashboard (`Dashboard.js`)**: Unified command center with quick summaries (active farms, crop health, weather preview, soil status, alerts, recent orders).
+- **Farms (`Farms.js`)**: Interactive farm cards, modal to add new farm, soil & irrigation badges, total acreage visualizer.
+- **Crops (`Crops.js`)**: Visual crop timeline (sowing -> harvest), health status badges, stage progression buttons, harvest estimation calculator.
+- **Soil Health (`SoilHealth.js`)**: Interactive N-P-K & pH sliders, live Soil Quality Score gauge, Radar nutrient chart, and tailored fertilizer suggestions.
+- **Weather & Pests (`WeatherAndPests.js`)**: City search, live weather card, 7-day forecast, humidity/wind metrics, and real-time pest risk alerts with prevention protocols.
+- **Marketplace & Cart (`Marketplace.js`, `Cart.js`, `Orders.js`)**: Product catalog with category filter, search, rating badges, interactive cart, animated checkout modal, and visual order tracking timeline.
+- **Community Forum (`Forum.js`)**: Question feed, category filter, Ask Expert modal, verified expert answer badges, and upvoting.
+- **Admin Dashboard (`AdminDashboard.js`)**: Executive stats cards, user list management, inventory stock management, and emergency alert broadcast system.
+
+---
+
+## Verification Plan
+
+### 1. Automated & Scripted Tests
+- Run `node backend/seeders/seedData.js` to verify database connection, schema validation, and seed insertion.
+- Run endpoint test suite verifying Auth (Registration, Login, Role verification), Farm CRUD, Crop Lifecycle updates, Soil Health calculation, Weather & Pest APIs, Marketplace checkout, and Forum interactions.
+
+### 2. Full-Stack End-to-End Testing
+- Start Express backend server on port `5000`.
+- Start React frontend development server on port `3000`.
+- Test user flows:
+  - Farmer login via Demo button -> View Farm Dashboard -> Add New Farm -> Add Crop.
+  - Test Soil Health Analyzer -> Check NPK recommendations and Radar Chart rendering.
+  - Test Weather & Pest Alert page -> Check 7-day forecast and preventative advisory.
+  - Test Marketplace -> Add Seeds/Fertilizers to Cart -> Place Order -> Track Order Status.
+  - Test Multilingual Switcher -> Verify instant translation to Hindi / Telugu / Tamil.
+  - Test Admin Login -> Verify Admin Dashboard metrics, inventory stock updates, and emergency alert broadcast.
